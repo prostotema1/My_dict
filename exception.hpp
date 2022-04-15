@@ -1,3 +1,4 @@
+#include"not_found_exception.hpp"
 template <class Key>
 class KeyNotFoundException : public not_found_exception<Key>
 {
