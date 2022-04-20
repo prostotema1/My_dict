@@ -16,9 +16,18 @@ public:
     my_dict& operator=(my_dict&) = delete;
     my_dict& operator=(const my_dict&) = delete;
 
-    const Value& get(const Key& key) const override;
+    const Value& get(const Key& key) const override {
+        auto find = dict.find(key);
+        if (find == dict.end()) {
+            throw KeyNotFoundException<Key>(key);
+        }
+        return find->second;
+    }
 
-    void set(const Key& key, const Value& value) override;
-    
-    bool is_set(const Key& key) const override;
-}
+    void set(const Key& key, const Value& value) override{
+        dict[key] =  value;
+    }
+    bool is_set(const Key& key) const override {
+        return dict.find(key) != dict.end();
+    }
+};
